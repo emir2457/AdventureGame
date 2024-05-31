@@ -11,8 +11,6 @@ public class Game {
         Scanner scan = new Scanner(System.in);
         System.out.println("====================================");
         System.out.println("Macera Oyununa Hoşgeldiniz ! ");
-        System.out.println("İsminizi Giriniz: ");
-        String playerName = scan.nextLine();
         player = new Player("Emir");
         player.selectChar();
         start();
@@ -31,7 +29,6 @@ public class Game {
             System.out.println();
             System.out.println("====================================");
             System.out.print("Gitmek istediğiniz yeri seçiniz : ");
-            
 
             int selectLocation = scan.nextInt();
             while (selectLocation < 1 || selectLocation > 5) {
@@ -43,6 +40,15 @@ public class Game {
                 case 1:
                     location = new SafeHouse(player);
                     break;
+                case 2:
+                    location = new Cave(player);
+                    break;
+                case 3:
+                    location = new Forest(player);
+                    break;
+                case 4:
+                    location = new River(player);
+                    break;
                 case 5:
                     location = new ToolStore(player);
                     break;
@@ -50,6 +56,7 @@ public class Game {
                     location = new SafeHouse(player);
             }
             if (!location.getLocation()) {
+                System.out.println("");
                 System.out.println("Oyun bitti.");
             }
         }

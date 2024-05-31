@@ -30,6 +30,7 @@ public class Player {
 
         }
         System.out.println("====================================");
+        System.out.println(getName() + " Karakterini Seçtiniz !! ");
         System.out.println("");
         System.out.println("Karakter : " + getName() + "\t Hasar: " + getDamage() + "\t Sağlık : " + getHealthy() + "\t Para: " + getMoney());
         
@@ -70,6 +71,9 @@ public class Player {
         setrHealthy(healthy);
     }
 
+    public int getTotalDamage(){
+        return this.getDamage() + this.getInv().getDamage();
+    }
 
     public int getDamage() {
         return damage;

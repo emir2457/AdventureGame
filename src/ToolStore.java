@@ -20,7 +20,8 @@ public class ToolStore extends NormalLoc {
                 buyWeapon(selectItemID);
                 break;
             case 2:
-
+                selectItemID = armorMenu();
+                buyArmor(selectItemID);
                 break;
             case 3:
                 System.out.println("Çıkış yapılıyor.");
@@ -43,6 +44,60 @@ public class ToolStore extends NormalLoc {
 
     }
 
+    public int armorMenu() {
+        System.out.println("1 - Hafif Zırh\t <Para :15  - Defans : 1  >");
+        System.out.println("2 - Orta Zırh\t  <Para :25  - Defans : 3>");
+        System.out.println("3 - Ağır Zırh\t  <Para :40  - Defans :  >");
+        System.out.println("4 - Çıkış Yap");
+
+        int selectArmorID = scan.nextInt();
+        return selectArmorID;
+    }
+
+    public void buyArmor(int itemID) {
+        int avoid = 0, price = 0;
+        String armorName = null;
+        switch (itemID) {
+            case 1:
+                avoid = 1;
+                armorName = "Hafif Zırh";
+                price = 15;
+                break;
+            case 2:
+                avoid = 3;
+                armorName = "Orta Zırh";
+                price = 25;
+                break;
+            case 3:
+                avoid = 5;
+                armorName = "Ağır Zırh";
+                price = 40;
+                break;
+            case 4:
+                System.out.println("Çıkış Yapılıyor");
+                break;
+            default:
+                System.out.println("Geçersiz İşlem");
+                break;
+        }
+        if (price > 0) {
+            if (player.getMoney() >= price) {
+                player.getInv().setArmor(avoid);
+                player.getInv().setArmorName(armorName);
+                player.setMoney(player.getMoney() - price);
+                System.out.println(armorName + " başarıyla satın alındı !! \n Engellenen Vuruş : " + player.getInv().getArmor());    
+            }
+            else{
+                System.out.println("Para yetersiz !! ");
+            }
+
+
+        }
+
+
+
+
+    }
     public void buyWeapon(int itemID) {
         int damage = 0, price = 0;
         String weaponName = null;
@@ -67,16 +122,19 @@ public class ToolStore extends NormalLoc {
                 System.out.println("Çıkış yapılıyor.");
                 break;
             default:
+                System.out.println("Geçersiz İşlem");
                 break;
         }
-        if (player.getMoney() > price) {
-            player.getInv().setDamage(damage);
-            player.getInv().setWeaponName(weaponName);
-            player.setMoney(player.getMoney() - price);
-            System.out.println(weaponName + " Silahını Satın Aldınız. Önceki Hasar :  " + player.getDamage() + " Yeni Hasar : " + (player.getDamage() + player.getInv().getDamage()));
-            System.out.println("Kalan Para : " + player.getMoney());
-        } else {
-            System.out.println("Bakiye yetersiz !!");
+        if (price > 0) {
+            if (player.getMoney() >= price) {
+                player.getInv().setDamage(damage);
+                player.getInv().setWeaponName(weaponName);
+                player.setMoney(player.getMoney() - price);
+                System.out.println(weaponName + " satın aldınız , Önceki Hasar : " + player.getDamage() + " Yeni hasarınız : " + player.getTotalDamage());
+
+            } else {
+                System.out.println("Paranız yetersiz...");
+            }
         }
 
     }
