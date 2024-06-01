@@ -18,11 +18,11 @@ public abstract class BattleLoc extends Location {
         System.out.println("Şuan buradasınız :  " + this.getName());
         System.out.println("Dikkatli Ol !! Burada " + obsCount + " tane " + obstacle.getName() + " yaşıyor !! ");
         System.out.println("Savaş veya Kaç (Savaşmak için S tuşuna bas)");
-        String selectChoice = scan.nextLine();
+        String selectChoice = scan.next();
         selectChoice = selectChoice.toUpperCase();
         if (selectChoice.equals("S")) {
             if (combat(obsCount)) {
-                System.out.println(this.getLocation() + " Bölgesindeki Tüm Düşmanları Yendin !! ");
+                System.out.println(this.getName() + " Bölgesindeki Tüm Düşmanları Yendin !! ");
                 if (this.award.equals("Food") && player.getInv().isFood() == false) {
                     System.out.println(this.award + " Kazandınız ! ");
                     player.getInv().setFood(true);
@@ -36,10 +36,9 @@ public abstract class BattleLoc extends Location {
                 }
                 return true;
 
-            } else {
-                System.out.println("");
-                System.out.println(" Ö L D Ü N ");
-                System.out.println("");
+            } 
+            if(player.getHealthy() <= 0) {
+                System.out.println("Öldünüz");
                 return false;
             }
         }
@@ -67,14 +66,17 @@ public abstract class BattleLoc extends Location {
                         afterHit();
                     }
                 } else {
-                    break;
+                    return false;
+                   
                 }
 
-                if (obstacle.getHp() <= 0 && player.getHealthy() > 0) {
+                if (obstacle.getHp() < player.getHealthy()) {
                     System.out.println("Canavarları Yendin !! ");
                     player.setMoney(player.getMoney() + obstacle.getAward());
                     System.out.println("Güncel Paranız : " + player.getMoney());
                     obstacle.setHp(defObsHealth);
+                   
+
                 } else {
                     return false;
 

@@ -55,6 +55,12 @@ public class Game {
                 default:
                     location = new SafeHouse(player);
             }
+            if (location.getClass().getName().equals("SafeHouse")) {
+                if (player.getInv().isFood() && player.getInv().isFirewood() && player.getInv().isWater()) {
+                    System.out.println("Tebrikler Bütün Malzemeleri Topladınız.");
+                    break;
+                }
+            }
             if (!location.getLocation()) {
                 System.out.println("");
                 System.out.println("Oyun bitti.");
