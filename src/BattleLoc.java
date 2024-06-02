@@ -18,7 +18,7 @@ public abstract class BattleLoc extends Location {
         System.out.println("Şuan buradasınız :  " + this.getName());
         System.out.println("Dikkatli Ol !! Burada " + obsCount + " tane " + obstacle.getName() + " yaşıyor !! ");
         System.out.println("Savaş veya Kaç (Savaşmak için S tuşuna bas)");
-        String selectChoice = scan.next();
+        String selectChoice = scan.nextLine();
         selectChoice = selectChoice.toUpperCase();
         if (selectChoice.equals("S")) {
             if (combat(obsCount)) {
